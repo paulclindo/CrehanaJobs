@@ -1,0 +1,29 @@
+query FilterByCountry($country: String) {
+  countries {
+    jobs(where: { countries_every: { name_contains: $country } }) {
+      id
+      title
+      commitment {
+        id
+        title
+      }
+      company {
+        id
+        name
+      }
+      cities {
+        id
+        name
+        country {
+          id
+          name
+        }
+      }
+      company {
+        id
+        name
+      }
+      postedAt
+    }
+  }
+}

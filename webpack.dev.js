@@ -10,37 +10,46 @@ module.exports = {
   mode: "development",
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "js/[name].js",
-    publicPath: "http://localhost:9000/",
-    chunkFilename: "js/[id].[chunkash].js"
+    filename: "js/[name].bundle.js"
+    // chunkFilename: "js/[id].[chunkash].js"
   },
   devServer: {
     contentBase: path.resolve(__dirname, "dist"),
     open: true,
-    port: 9000,
-    historyApiFallback: true
+    port: 9000
   },
+  // resolve: {
+  //   modules: [path.resolve(__dirname, "src"), "node_modules"]
+  // },
 
   module: {
     rules: [
       {
-        test: /\.jpg|png|gif|woff|eot|ttf|svg|mp4|webm$/,
-        use: {
-          loader: "file-loader",
-          options: {
-            outPath: "assets"
-          }
-        }
-      },
-      {
         test: /\.js$/,
         use: "babel-loader",
-        exclude: /node_modules/
+        type: "javascript/auto",
+        exclude: /node_modules\/(?!(apollo-client)\/).*/
       },
       // {
-      //   test: /\.scss|css$/,
-      //   use: ["style-loader", "css-loader", "sass-loader"]
-      // }
+      //   test: /\.jpg|png|gif|woff|eot|ttf|svg|mp4|webm$/,
+      //   use: {
+      //     loader: "file-loader",
+      //     options: {
+      //       outPath: "assets"
+      //     }
+      //   }
+      // },
+      // {
+      //   type: "javascript/auto",
+      //   test: /\.mjs$/,
+      //   use: []
+      // },
+
+      {
+        test: /\.(graphql|gql)$/,
+        exclude: /node_modules/,
+        loader: "graphql-tag/loader"
+      }
     ]
   },
 
