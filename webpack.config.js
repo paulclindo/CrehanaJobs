@@ -3,7 +3,6 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const TersetJSPlugin = require("terser-webpack-plugin");
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 module.exports = {
   entry: {
@@ -16,7 +15,7 @@ module.exports = {
     chunkFilename: "js/[id].[chunkhash].js"
   },
   optimization: {
-    minimizer: [new TersetJSPlugin(), new OptimizeCSSAssetsPlugin()]
+    minimizer: [new TersetJSPlugin()]
   },
 
   devServer: {
