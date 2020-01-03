@@ -1,6 +1,6 @@
-query jobsByCompany($company: String) {
+query jobsByCompany($companyId: ID!) {
   countries {
-    jobs(where: { company: { name_contains: $company } }) {
+    jobs(where: { company: { id: $companyId } }) {
       id
       title
       commitment {

@@ -32,6 +32,7 @@ const GET_JOBS = gql`
 export const ListOfJobCards = () => {
   const { loading, error, data } = useQuery(GET_JOBS);
   if (loading) return <Loader />;
+  console.log(data, "data of job complete")
 
   return <ListOfJobCardsComponent data={data} />;
 };

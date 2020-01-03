@@ -5,6 +5,11 @@ class SearchInput extends Component {
   state = {
     searchText: ""
   };
+  onSearchChange = (e) => {
+    const searchText = e.target.value
+    this.props.onChange(searchText)
+  }
+
   render() {
     return (
       <SearchContainer>
@@ -21,8 +26,8 @@ class SearchInput extends Component {
         </svg>
         <SearchJobInput
           type="text"
-          onChange={e => this.setState({ searchText: e.target.value })}
-          placeholder="Search Jobs: React, Javascript"
+          onChange={this.onSearchChange}
+          placeholder="Search Jobs: React, JavaScript, Backend"
         />
       </SearchContainer>
     );

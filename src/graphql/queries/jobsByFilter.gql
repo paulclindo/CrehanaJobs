@@ -1,0 +1,29 @@
+query SearchByTitle($title: String, $companyId:ID,$countryId:ID) {
+  countries {
+    jobs(where :{title_contains:$title,AND : {company:{id:$companyId},AND: {countries_every: {id:$countryId}} } } ) {
+      id
+      title
+      commitment {
+        id
+        title
+      }
+      company {
+        id
+        name
+      }
+      cities {
+        id
+        name
+        country {
+          id
+          name
+        }
+      }
+      company {
+        id
+        name
+      }
+      postedAt
+    }
+  }
+}

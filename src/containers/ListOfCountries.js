@@ -13,9 +13,13 @@ const GET_COUNTRIES = gql(`
     }
 `);
 
-export const ListOfCountries = () => {
-  const { loading, error, data } = useQuery(GET_COUNTRIES);
-  if (loading) return "Loading...";
+export const ListOfCountries = (props) => {
+    const onCountryChange = (value) => {
+        props.onChange(value)
+    }
 
-  return <CountriesListComponent data={data} />;
+    const { loading, error, data } = useQuery(GET_COUNTRIES);
+    if (loading) return "Loading...";
+
+    return <CountriesListComponent onChange={onCountryChange} data={data} />;
 };

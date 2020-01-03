@@ -5,18 +5,27 @@ import { gql } from "apollo-boost";
 
 import jobsByCountry from "../graphql/queries/jobsByCountry.gql";
 import { ListOfJobCardsComponent } from "./../components/ListOfJobCards/index";
+import Loader from "../components/Loader.js";
 
 const GET_JOBS_BY_COUNTRY = gql`
   ${jobsByCountry}
 `;
 
-export const ListWithQueryCountry = ({ country }) => {
+export const ListWithQueryCountry = ({ countryId }) => {
   const { loading, error, data } = useQuery(GET_JOBS_BY_COUNTRY, {
-    variables: { country }
+    variables: { countryId }
   });
-  console.log({ data, country });
-  const countries = data && data.countries[1];
-  // console.log({ countries });
-  if (loading) return "Loading...";
-  return <ListOfJobCardsComponent data={countries} />;
+  console.log(data)
+  if (loading) return <Loader />;
+  if (error) return <h1>Something goes wrong!</h1>;
+  // return <ListOfJobCardsComponent data={countries} />;
+  return (
+    <>
+      {
+        data.countries.map(jobs => {
+          return < ListOfJobCardsComponent data={jobs} />
+        })
+      }
+    </>
+  )
 };

@@ -5,9 +5,9 @@ import Loader from "../Loader.js";
 export const ListOfJobCardsComponent = ({
   data: { jobs = [], loading, error } = {}
 }) => (
-  <ul>
-    {jobs.map(job => (
-      <JobCard key={job.id} {...job} />
-    ))}
-  </ul>
-);
+    <ul>
+      {jobs.map(job => (
+        <JobCard key={job.id} {...job} />
+      ))}
+    </ul>
+  );

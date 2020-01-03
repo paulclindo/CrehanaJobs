@@ -12,9 +12,13 @@ query getCompanies {
 }
 `);
 
-export const ListOfCompanies = () => {
+export const ListOfCompanies = (props) => {
+  const onCompanyChange = (value) => {
+    props.onChange(value)
+  }
+
   const { loading, error, data } = useQuery(GET_COMPANIES);
   if (loading) return "Loading...";
 
-  return <CompaniesListComponent data={data} />;
+  return <CompaniesListComponent onChange={onCompanyChange} data={data} />;
 };

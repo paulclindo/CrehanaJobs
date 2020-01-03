@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import GlobalStyles from "../styles/GlobalStyles";
 import styled from "styled-components";
 import { ListOfJobCards } from "../containers/ListOfJobCards";
@@ -7,40 +7,35 @@ import Filter from "./../components/Filter/index";
 import { ListWithQueryCountry } from "../containers/ListWithQueryCountry";
 import { ListWithQueryCompany } from "./../containers/ListWithQueryCompany";
 import { ListWithQuerySearch } from "./../containers/ListWithQuerySearch";
+import { ListWithQuery } from "./../containers/ListWithQuery";
 
-const Navbar = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 80px;
-  width: 100%;
-`;
-const Logo = styled.div`
-  display: flex;
-  width: 180px;
-  align-items: center;
-  img {
-    height: 100%;
-    width: 100%;
+import { CountriesListComponent } from "../components/CountriesList"
+import { ListOfCountries } from "../containers/ListOfCountries"
+import { ListOfCompanies } from "../containers/ListOfCompanies"
+import { Navbar, Logo, Title, FilterContainer } from "../styles/Home"
+
+class Home extends Component {
+  state = {
+    textSearch: "",
+    countryId: "",
+    companyId: ""
   }
-  strong {
-    color: #00cbd3;
-    color: #181b32;
-    text-transform: uppercase;
+
+  onSearchChange = (value) => {
+    this.setState({ textSearch: value })
   }
-`;
-const Title = styled.h2`
-  margin: 2rem 0;
-`;
-
-const Home = () => {
-  // const queryCountry = "Poland";
-  const queryCompany = "Prisma";
-  const queryTitle = "JavaScript";
-
-  return (
-    <>
-      <GlobalStyles></GlobalStyles>
+  onCountryChange = (value) => {
+    this.setState({ countryId: value })
+  }
+  onCompanyChange = (value) => {
+    this.setState({ companyId: value })
+  }
+  render() {
+    const {
+      textSearch, countryId, companyId
+    } = this.state
+    return (<>
+      <GlobalStyles />
       <Navbar>
         <Logo>
           <img
@@ -50,19 +45,32 @@ const Home = () => {
           <strong>Jobs</strong>
         </Logo>
 
-        <SearchInput />
+        <SearchInput onChange={this.onSearchChange} />
       </Navbar>
       <Title>Jobs for you!</Title>
-      <Filter />
-      {/* {queryCountry ? ( */}
-      {/* <ListWithQueryCountry country={queryCountry} /> */}
-      {/* <ListWithQueryCountry company={queryCompany} /> */}
-      {/* <ListWithQueryCountry company={queryCompany} /> */}
-      {/* <ListWithQueryCompany company={queryCompany} /> */}
-      {/* <ListWithQuerySearch title={queryTitle} /> */}
-      {/* ) : ( */}
-      <ListOfJobCards />
-    </>
-  );
-};
+      <FilterContainer>
+        <p>Filter</p>
+        <div>
+          <ListOfCountries onChange={this.onCountryChange} />
+        </div>
+        <div>
+          <ListOfCompanies onChange={this.onCompanyChange} />
+        </div>
+      </FilterContainer>
+
+      {
+        // (textSearch && countryId && companyId) ?
+        <ListWithQuery title={textSearch} countryId={countryId} companyId={companyId} />
+        // : <ListWithQuerySearch />
+      }
+
+      }
+
+
+      {/* <ListWithQueryCountry countryId={countryId} /> */}
+      {/* <ListWithQueryCompany companyId={companyId} /> */}
+    </>);
+  }
+}
+
 export default Home;

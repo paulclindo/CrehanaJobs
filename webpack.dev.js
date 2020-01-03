@@ -18,9 +18,6 @@ module.exports = {
     open: true,
     port: 9000
   },
-  // resolve: {
-  //   modules: [path.resolve(__dirname, "src"), "node_modules"]
-  // },
 
   module: {
     rules: [
@@ -30,21 +27,6 @@ module.exports = {
         type: "javascript/auto",
         exclude: /node_modules\/(?!(apollo-client)\/).*/
       },
-      // {
-      //   test: /\.jpg|png|gif|woff|eot|ttf|svg|mp4|webm$/,
-      //   use: {
-      //     loader: "file-loader",
-      //     options: {
-      //       outPath: "assets"
-      //     }
-      //   }
-      // },
-      // {
-      //   type: "javascript/auto",
-      //   test: /\.mjs$/,
-      //   use: []
-      // },
-
       {
         test: /\.(graphql|gql)$/,
         exclude: /node_modules/,

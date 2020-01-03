@@ -1,6 +1,6 @@
-query FilterByCountry($country: String) {
+query FilterByCountry($countryId: ID!) {
   countries {
-    jobs(where: { countries_every: { name_contains: $country } }) {
+    jobs(where: { countries_every: { id: $countryId } }) {
       id
       title
       commitment {
