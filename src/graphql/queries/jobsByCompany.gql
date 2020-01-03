@@ -1,0 +1,29 @@
+query jobsByCompany($company: String) {
+  countries {
+    jobs(where: { company: { name_contains: $company } }) {
+      id
+      title
+      commitment {
+        id
+        title
+      }
+      company {
+        id
+        name
+      }
+      cities {
+        id
+        name
+        country {
+          id
+          name
+        }
+      }
+      company {
+        id
+        name
+      }
+      postedAt
+    }
+  }
+}
