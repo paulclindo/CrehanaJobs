@@ -22,10 +22,6 @@ module.exports = {
     port: 8000,
     open: true
   },
-  resolve: {
-    mainFields: ['browser', 'main', 'module'],
-    extensions: ['.js', '.json', '.jsx']
-  },
   module: {
     rules: [
       {

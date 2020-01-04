@@ -6,14 +6,17 @@ import { ListOfJobCardsComponent } from "./../components/ListOfJobCards/index";
 import jobsByFilter from "../graphql/queries/jobsByFilter.gql";
 import Loader from "../components/Loader.js";
 
-const GET_JOBS_FILTERED = gql`
+export const GET_JOBS_FILTERED = gql`
   ${jobsByFilter}
 `;
 
 export const ListWithQuery = ({ title, countryId, companyId, order }) => {
   const { loading, error, data } = useQuery(GET_JOBS_FILTERED, {
     variables: {
-      title, countryId, companyId, order
+      title,
+      countryId,
+      companyId,
+      order
     }
   });
   if (loading) return <Loader />;
@@ -21,11 +24,9 @@ export const ListWithQuery = ({ title, countryId, companyId, order }) => {
 
   return (
     <>
-      {
-        data.countries.map(jobs => {
-          return < ListOfJobCardsComponent data={jobs} />
-        })
-      }
+      {data.countries.map(jobs => {
+        return <ListOfJobCardsComponent data={jobs} />;
+      })}
     </>
-  )
+  );
 };

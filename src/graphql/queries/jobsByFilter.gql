@@ -1,12 +1,17 @@
-query FilterJobs($title: String, $companyId: ID, $countryId: ID, $order:JobOrderByInput) {
+query FilterJobs(
+  $title: String
+  $companyId: ID
+  $countryId: ID
+  $order: JobOrderByInput
+) {
   countries {
     jobs(
-      orderBy:$order,
+      orderBy: $order
       where: {
-        title_contains: $title,
+        title_contains: $title
         AND: {
           company: { id_contains: $companyId }
-          AND: { countries_every: { id_contains: $countryId } },
+          AND: { countries_every: { id_contains: $countryId } }
         }
       }
     ) {
@@ -36,4 +41,3 @@ query FilterJobs($title: String, $companyId: ID, $countryId: ID, $order:JobOrder
     }
   }
 }
-
