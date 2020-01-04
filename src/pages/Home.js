@@ -1,24 +1,20 @@
 import React, { Component } from "react";
 import GlobalStyles from "../styles/GlobalStyles";
-import styled from "styled-components";
+import { Navbar, Logo, Title, FilterContainer } from "../styles/Home"
 import { ListOfJobCards } from "../containers/ListOfJobCards";
 import SearchInput from "../components/SearchInput";
-import Filter from "./../components/Filter/index";
-import { ListWithQueryCountry } from "../containers/ListWithQueryCountry";
-import { ListWithQueryCompany } from "./../containers/ListWithQueryCompany";
-import { ListWithQuerySearch } from "./../containers/ListWithQuerySearch";
 import { ListWithQuery } from "./../containers/ListWithQuery";
-
-import { CountriesListComponent } from "../components/CountriesList"
 import { ListOfCountries } from "../containers/ListOfCountries"
 import { ListOfCompanies } from "../containers/ListOfCompanies"
-import { Navbar, Logo, Title, FilterContainer } from "../styles/Home"
+
+import OrderInput from "../components/OrderDateInput"
 
 class Home extends Component {
   state = {
     textSearch: "",
     countryId: "",
-    companyId: ""
+    companyId: "",
+    order: ""
   }
 
   onSearchChange = (value) => {
@@ -30,10 +26,15 @@ class Home extends Component {
   onCompanyChange = (value) => {
     this.setState({ companyId: value })
   }
+  onOrderChange = (value) => {
+    this.setState({ order: value })
+  }
+
   render() {
     const {
       textSearch, countryId, companyId
     } = this.state
+
     return (<>
       <GlobalStyles />
       <Navbar>
@@ -44,33 +45,25 @@ class Home extends Component {
           />
           <strong>Jobs</strong>
         </Logo>
-
         <SearchInput onChange={this.onSearchChange} />
       </Navbar>
       <Title>Jobs for you!</Title>
       <FilterContainer>
         <p>Filter</p>
-        <div>
-          <ListOfCountries onChange={this.onCountryChange} />
-        </div>
-        <div>
-          <ListOfCompanies onChange={this.onCompanyChange} />
-        </div>
+        <ListOfCountries onChange={this.onCountryChange} />
+        <ListOfCompanies onChange={this.onCompanyChange} />
+        <OrderInput onChange={this.onOrderChange} />
       </FilterContainer>
-
       {
-        // (textSearch && countryId && companyId) ?
-        <ListWithQuery title={textSearch} countryId={countryId} companyId={companyId} />
-        // : <ListWithQuerySearch />
-      }
+        (textSearch || countryId || companyId) ?
+          <ListWithQuery title={textSearch} countryId={countryId} companyId={companyId} />
+          : <ListOfJobCards />
 
       }
-
-
-      {/* <ListWithQueryCountry countryId={countryId} /> */}
-      {/* <ListWithQueryCompany companyId={companyId} /> */}
     </>);
   }
 }
 
 export default Home;
+
+

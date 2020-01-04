@@ -3,7 +3,7 @@ import JobCard from "./../JobCard/index";
 import Loader from "../Loader.js";
 
 export const ListOfJobCardsComponent = ({
-  data: { jobs = [], loading, error } = {}
+  data: { jobs = [] } = {}
 }) => (
     <ul>
       {jobs.map(job => (

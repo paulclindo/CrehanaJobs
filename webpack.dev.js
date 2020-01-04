@@ -11,10 +11,8 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "js/[name].bundle.js"
-    // chunkFilename: "js/[id].[chunkash].js"
   },
   devServer: {
-    contentBase: path.resolve(__dirname, "dist"),
     open: true,
     port: 9000
   },
@@ -25,7 +23,7 @@ module.exports = {
         test: /\.js$/,
         use: "babel-loader",
         type: "javascript/auto",
-        exclude: /node_modules\/(?!(apollo-client)\/).*/
+        exclude: /node_modules/
       },
       {
         test: /\.(graphql|gql)$/,

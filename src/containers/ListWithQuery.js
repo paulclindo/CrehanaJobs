@@ -10,14 +10,15 @@ const GET_JOBS_FILTERED = gql`
   ${jobsByFilter}
 `;
 
-export const ListWithQuery = ({ title, countryId, companyId }) => {
+export const ListWithQuery = ({ title, countryId, companyId, order }) => {
   const { loading, error, data } = useQuery(GET_JOBS_FILTERED, {
     variables: {
-      title, countryId, companyId
+      title, countryId, companyId, order
     }
   });
   if (loading) return <Loader />;
-  console.log(data)
+  if (error) return <h1>Something goes wrong!</h1>;
+
   return (
     <>
       {

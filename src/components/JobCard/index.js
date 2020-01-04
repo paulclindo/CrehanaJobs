@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import {
   JobCardContainer,
   JobDescription,
@@ -36,3 +37,12 @@ const JobCard = ({ title, postedAt, commitment, cities, company }) => {
 };
 
 export default JobCard;
+
+
+JobCard.propTypes = {
+  title: PropTypes.string,
+  postedAt: PropTypes.string,
+  commitment: PropTypes.object,
+  cities: PropTypes.array,
+  company: PropTypes.object
+}

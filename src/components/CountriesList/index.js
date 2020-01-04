@@ -1,12 +1,12 @@
 import React from "react";
-
+import PropTypes from 'prop-types';
 export const CountriesListComponent = ({ data: { countries = [] } = {}, onChange }) => {
   const onChangeCountry = (e) => {
     const countrySelected = e.target.value
     onChange(countrySelected)
   }
   return (
-    <>
+    <div>
       <label>By Country</label>
       <select onChange={onChangeCountry}>
         {countries.map(country => (
@@ -15,6 +15,12 @@ export const CountriesListComponent = ({ data: { countries = [] } = {}, onChange
           </option>
         ))}
       </select>
-    </>
+    </div>
   );
 };
+
+
+CountriesListComponent.propTypes = {
+  data: PropTypes.object,
+  onChange: PropTypes.func
+}

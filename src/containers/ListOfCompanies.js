@@ -2,15 +2,11 @@ import React from "react";
 import { CompaniesListComponent } from "../components/CompaniesList";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
+import getCompanies from "../graphql/queries/getCompanies.gql"
 
-const GET_COMPANIES = gql(`
-query getCompanies {
-  companies {
-    id
-    name
-  }
-}
-`);
+const GET_COMPANIES = gql`
+  ${getCompanies}
+`;
 
 export const ListOfCompanies = (props) => {
   const onCompanyChange = (value) => {

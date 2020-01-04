@@ -3,36 +3,15 @@ import { ListOfJobCardsComponent } from "./../components/ListOfJobCards/index";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import Loader from "../components/Loader.js";
+import getJobs from "../graphql/queries/getJobs.gql"
 
 const GET_JOBS = gql`
-  query getJobs {
-    jobs {
-      id
-      title
-      commitment {
-        title
-      }
-      cities {
-        id
-        name
-        country {
-          id
-          name
-        }
-      }
-      company {
-        id
-        name
-      }
-      postedAt
-    }
-  }
+  ${getJobs}
 `;
 
 export const ListOfJobCards = () => {
   const { loading, error, data } = useQuery(GET_JOBS);
   if (loading) return <Loader />;
-  console.log(data, "data of job complete")
 
   return <ListOfJobCardsComponent data={data} />;
 };

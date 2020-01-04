@@ -1,6 +1,15 @@
-query SearchByTitle($title: String, $companyId:ID,$countryId:ID) {
+query FilterJobs($title: String, $companyId: ID, $countryId: ID, $order:JobOrderByInput) {
   countries {
-    jobs(where :{title_contains:$title,AND : {company:{id:$companyId},AND: {countries_every: {id:$countryId}} } } ) {
+    jobs(
+      orderBy:$order,
+      where: {
+        title_contains: $title,
+        AND: {
+          company: { id_contains: $companyId }
+          AND: { countries_every: { id_contains: $countryId } },
+        }
+      }
+    ) {
       id
       title
       commitment {
@@ -27,3 +36,4 @@ query SearchByTitle($title: String, $companyId:ID,$countryId:ID) {
     }
   }
 }
+

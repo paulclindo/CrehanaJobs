@@ -1,0 +1,22 @@
+ query getJobs {
+    jobs {
+      id
+      title
+      commitment {
+        title
+      }
+      cities {
+        id
+        name
+        country {
+          id
+          name
+        }
+      }
+      company {
+        id
+        name
+      }
+      postedAt
+    }
+  }
